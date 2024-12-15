@@ -10,6 +10,7 @@ import { ProjectModule } from './project/project.module';
 import { TaskModule } from './task/task.module';
 import { MessageModule } from './message/message.module';
 import { UserModule } from './user/user.module';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { UserModule } from './user/user.module';
     TaskModule,
     MessageModule,
     UserModule,
+    DashboardModule,
   ],
   controllers: [AppController],
   providers: [AppService],
