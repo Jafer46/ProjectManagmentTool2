@@ -1,26 +1,49 @@
 import { Injectable } from '@nestjs/common';
 import { CreateMessageDto } from './dto/create-message.dto';
 import { UpdateMessageDto } from './dto/update-message.dto';
+import { PrismaService } from 'src/common/prisma.Service';
+import { Message, Prisma } from '@prisma/client';
 
 @Injectable()
 export class MessageService {
-  create(createMessageDto: CreateMessageDto) {
-    return 'This action adds a new message';
+  constructor(private readonly prisma: PrismaService) {}
+
+  async create(createMessageDto: CreateMessageDto): Promise<Message> {
+    const { content, userId, projectId } = createMessageDto;
+
+    const data: Prisma.MessageCreateInput = {
+      content,
+      user: {
+        connect: { id: userId },
+      },
+      project: {
+        connect: { id: projectId },
+      },
+    };
+    return this.prisma.message.create({
+      data,
+    });
   }
 
-  findAll() {
-    return `This action returns all message`;
+  async findAll() {
+    return this.prisma.message.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} message`;
+  async findOne(id: number) {
+    return this.prisma.message.findUnique({ where: { id } });
   }
 
-  update(id: number, updateMessageDto: UpdateMessageDto) {
-    return `This action updates a #${id} message`;
+  async update(updateMessageDto: UpdateMessageDto) {
+    const { id, content } = updateMessageDto;
+    return this.prisma.message.update({
+      where: { id },
+      data: {
+        content,
+      },
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} message`;
+  async remove(id: number) {
+    return this.prisma.message.delete({ where: { id } });
   }
 }

@@ -37,7 +37,7 @@ export class TaskController {
 
     if (isAdmin) {
       const data = body;
-      return this.taskServices.updateTask(data);
+      return this.taskServices.updateTask({ id, data });
     } else if (userId == cuserId) {
     } else {
       throw new UnauthorizedException('User is not Authorized');

@@ -31,7 +31,13 @@ export class TaskService {
     return this.prisma.task.create({ data });
   }
 
-  async updateTask(id: number, data: Prisma.TaskUpdateInput): Promise<Task> {
+  async updateTask({
+    id,
+    data,
+  }: {
+    id: number;
+    data: Prisma.TaskUpdateInput;
+  }): Promise<Task> {
     return this.prisma.task.update({
       where: { id },
       data,

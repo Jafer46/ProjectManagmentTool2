@@ -1,15 +1,43 @@
-import { WebSocketGateway, SubscribeMessage, MessageBody } from '@nestjs/websockets';
+import {
+  WebSocketGateway,
+  SubscribeMessage,
+  MessageBody,
+  WebSocketServer,
+} from '@nestjs/websockets';
 import { MessageService } from './message.service';
 import { CreateMessageDto } from './dto/create-message.dto';
 import { UpdateMessageDto } from './dto/update-message.dto';
+import { Server } from 'socket.io';
+import { OnModuleInit } from '@nestjs/common';
 
 @WebSocketGateway()
-export class MessageGateway {
+export class MessageGateway implements OnModuleInit {
+  @WebSocketServer()
+  server: Server;
+
+  private projectMembers: { [projectId: string]: string[] } = {};
+
   constructor(private readonly messageService: MessageService) {}
 
+  onModuleInit() {
+    this.server.on('connect', (socket) => {});
+  }
+
+  @SubscribeMessage('joinChat')
+  handleJoinProject(
+    @MessageBody() { projectId, userId }: { projectId: string; userId: string },
+  ) {
+    this.server.socketsJoin(projectId);
+    if (!this.projectMembers[projectId]) {
+      this.projectMembers[projectId] = [];
+    }
+    this.projectMembers[projectId].push(userId);
+  }
+
   @SubscribeMessage('createMessage')
-  create(@MessageBody() createMessageDto: CreateMessageDto) {
-    return this.messageService.create(createMessageDto);
+  async create(@MessageBody() createMessageDto: CreateMessageDto) {
+    const message = await this.messageService.create(createMessageDto);
+    this.server.in(message.projectId.toString()).emit('onMessage', message);
   }
 
   @SubscribeMessage('findAllMessage')
@@ -23,12 +51,14 @@ export class MessageGateway {
   }
 
   @SubscribeMessage('updateMessage')
-  update(@MessageBody() updateMessageDto: UpdateMessageDto) {
-    return this.messageService.update(updateMessageDto.id, updateMessageDto);
+  async update(@MessageBody() updateMessageDto: UpdateMessageDto) {
+    const message = await this.messageService.update(updateMessageDto);
+    this.server.emit('onUpdate', { message });
   }
 
   @SubscribeMessage('removeMessage')
-  remove(@MessageBody() id: number) {
-    return this.messageService.remove(id);
+  async remove(@MessageBody() id: number) {
+    const message = await this.messageService.remove(id);
+    this.server.emit('onRemove', { messsageId: message.id });
   }
 }
