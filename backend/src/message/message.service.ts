@@ -8,7 +8,7 @@ import { Message, Prisma } from '@prisma/client';
 export class MessageService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async create(createMessageDto: CreateMessageDto): Promise<Message> {
+  async create(createMessageDto: CreateMessageDto) {
     const { content, userId, projectId } = createMessageDto;
 
     const data: Prisma.MessageCreateInput = {
