@@ -33,9 +33,10 @@ model Project {
   id Int @id @default(autoincrement())
   title String
   description String
-  priority Int @default(0)
+  priority String
   status Int @default(0)
   creatorId Int
+  deadline DateTime
 
   tasks Task[]
   messages Message[]

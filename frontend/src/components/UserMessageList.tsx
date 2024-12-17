@@ -1,7 +1,8 @@
-import { userMessage } from "@/constants/fakedata";
+// import { userMessage } from "@/constants/fakedata";
 import UserMessgeCard from "./UserMessageCard";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useState } from "react";
+import { User } from "@/schema";
 
 export default function UserMessageList() {
   const [selectedId, setSelected] = useState<string | number>(1);
@@ -11,12 +12,12 @@ export default function UserMessageList() {
         <legend className="-ml-1 px-1 text-sm font-medium">Users</legend>
         <ScrollArea className="h-[70vh]">
           <div className="flex flex-col gap-4">
-            {userMessage.map((user, index) => (
+            {userMessage.map((user: User, index: number) => (
               <UserMessgeCard
                 id={index}
                 user={selectedId}
                 username={user.username}
-                avatar={user.avatar}
+                avatar={user?.avatar ?? ""}
                 setUser={setSelected}
               />
             ))}
