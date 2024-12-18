@@ -16,7 +16,7 @@ import { RefreshDTO } from './dto/refreshDTO';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @Post('signup') //auth/singup
+  @Post('register') //auth/singup
   async singup(@Body() singupData: SignupDTO) {
     return this.authService.singup(singupData);
   }

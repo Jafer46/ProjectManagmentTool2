@@ -37,6 +37,7 @@ model Project {
   status Int @default(0)
   creatorId Int
   deadline DateTime
+  type String
 
   tasks Task[]
   messages Message[]
