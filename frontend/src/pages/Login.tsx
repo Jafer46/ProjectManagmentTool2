@@ -33,9 +33,10 @@ export default function Login() {
   const onSubmit = async ({ email, password }: z.infer<typeof fromSchema>) => {
     setLoading(true);
     try {
-      const { user, accessToken } = await loginUser({ email, password });
+      const data = await loginUser({ email, password });
+      console.log(data);
       setLoading(false);
-      login(user, accessToken);
+      login(data.user, data.accessToken);
       navigate("/");
     } catch (err: any) {
       setLoading(false);

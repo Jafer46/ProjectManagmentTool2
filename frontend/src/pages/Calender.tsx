@@ -1,11 +1,13 @@
-import { ScrollArea } from '@radix-ui/react-scroll-area'
+import CalendarView from "@/components/CalenderView";
+import { ScrollArea } from "@radix-ui/react-scroll-area";
 
-function Calender () {
+function CalenderPage() {
   return (
-    <ScrollArea className='w-full h-full'>
-      <div>Calender</div>
-    </ScrollArea>
-  )
+    <div className=" mt-8">
+      <div className="absolute top-2 w-full flex justify-center"> Hello</div>
+      <CalendarView />
+    </div>
+  );
 }
 
-export default Calender
+export default CalenderPage;

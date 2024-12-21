@@ -47,7 +47,8 @@ export class AuthService {
       throw new UnauthorizedException('Wrong Crendentials');
     }
 
-    return await this.generateUserToken(user.id);
+    const tokenData = await this.generateUserToken(user.id);
+    return { user, ...tokenData };
   }
 
   async refreshTokens(refreshToken: string) {

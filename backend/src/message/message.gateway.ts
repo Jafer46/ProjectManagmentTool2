@@ -10,7 +10,13 @@ import { UpdateMessageDto } from './dto/update-message.dto';
 import { Server } from 'socket.io';
 import { OnModuleInit } from '@nestjs/common';
 
-@WebSocketGateway()
+@WebSocketGateway({
+  cors: {
+    origin: 'http://localhost:5173', // Allow this origin
+    methods: ['GET', 'POST'],
+    credentials: true,
+  },
+})
 export class MessageGateway implements OnModuleInit {
   @WebSocketServer()
   server: Server;

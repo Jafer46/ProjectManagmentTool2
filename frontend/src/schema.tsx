@@ -4,7 +4,7 @@ export interface error {
   message: string;
 }
 export interface User {
-  id: string | number;
+  id: number;
   username: string;
   email?: string;
   password?: string;
@@ -19,20 +19,23 @@ export interface User {
 }
 
 export interface Task {
-  id: string | number;
+  id: number;
   title: string;
   description: string;
   completed: boolean;
   createdAt?: Date;
 
-  projectId?: string | number;
-  userId?: string | number;
+  createdBy: number;
+  projectId?: number;
+  userId?: number;
   project?: Project;
   user?: User;
+  assignedUsers?: User[];
+  assignedUsersId?: number[];
 }
 
 export interface Project {
-  id: string | number;
+  id: string;
   title: string;
   description?: string;
   priority: "medium" | "high" | "low";
@@ -44,6 +47,47 @@ export interface Project {
   messages?: Message[];
   users?: User[];
 }
+
+const fileSizeLimit = 5 * 1024 * 1024; // 5MB
+
+// Document Schema
+export const DOCUMENT_SCHEMA = z
+  .instanceof(File)
+  .refine(
+    (file) =>
+      [
+        "image/png",
+        "image/jpeg",
+        "image/jpg",
+        "image/svg+xml",
+        "image/gif",
+        "application/pdf",
+        "application/vnd.ms-excel",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      ].includes(file.type),
+    { message: "Invalid file type" }
+  )
+  .refine((file) => file.size <= fileSizeLimit, {
+    message: "File size should not exceed 5MB",
+  });
+
+// Image Schema
+export const IMAGE_SCHEMA = z
+  .instanceof(File)
+  .refine(
+    (file) =>
+      [
+        "image/png",
+        "image/jpeg",
+        "image/jpg",
+        "image/svg+xml",
+        "image/gif",
+      ].includes(file.type),
+    { message: "Invalid image file type" }
+  )
+  .refine((file) => file.size <= fileSizeLimit, {
+    message: "File size should not exceed 5MB",
+  });
 
 export interface Message {
   id: string | number;

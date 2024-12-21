@@ -24,9 +24,11 @@ model User {
   updatedAt DateTime @updatedAt
 
   messages Message[]
-  tasks Task[]
-  projects Project[] @relation("UserPorjects")
+  createdTasks Task[]
+  assignedProjects Project[] @relation("UserPorjects")
   RefreshToken RefreshToken[]
+  assignedTasks Task[] @relation("UserTasks")
+  createdProjects Project[]
 }
 
 model Project {
@@ -41,6 +43,7 @@ model Project {
 
   tasks Task[]
   messages Message[]
+  creator User @relation(fields: [creatorId], references: [id])
   users User[] @relation("UserPorjects")
 }
 
@@ -53,19 +56,25 @@ model Task {
   completed Boolean @default(false)
   createdAt DateTime @default(now())
 
+  fileId Int?
   projectId Int 
-  userId Int
+  creatorId Int
   project Project @relation(fields: [projectId], references: [id])
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [creatorId], references: [id])
+  file File? @relation(fields: [fileId], references: [id])
+  assignedUsers User[] @relation("UserTasks")  
 }
 
 model Message {
   id Int @id @default(autoincrement())
   content String
+  contentType String?
   projectId Int
   userId Int
+  fileId Int?
   project Project @relation(fields: [projectId], references: [id])
   user User @relation(fields: [userId], references: [id])
+  file File? @relation(fields: [fileId], references: [id])
 }
 
 
@@ -75,4 +84,13 @@ model RefreshToken {
   userId Int
   expiryDate DateTime @default(now())
   user User @relation(references: [id], fields: [id])
+}
+
+model File {
+  id Int @id @default(autoincrement())
+  name String
+  path String @unique
+
+  Task Task[]
+  Message Message[]
 }
