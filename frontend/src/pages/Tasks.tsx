@@ -21,6 +21,7 @@ export default function Tasks() {
     queryKey: ["Tasks"],
     queryFn: () => getUserTasks(token),
   });
+
   const taskMutation = useMutation({
     mutationFn: (task: Task) => updateTask(task, token),
     onSuccess: (savedTask) => {
@@ -39,6 +40,7 @@ export default function Tasks() {
       });
     },
   });
+
   const update = (task: Task) => {
     task.completed = true;
     taskMutation.mutate(task);
