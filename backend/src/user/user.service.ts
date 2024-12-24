@@ -13,12 +13,26 @@ export class UserService {
     return this.prisma.user.findFirst({ where: { username: searchString } });
   }
 
-  async updateUser(updateUserDTO: UpdateUserDTO) {
-    const { id, avatar } = updateUserDTO;
+  async updateUser({
+    userId,
+    fileName,
+    filePath,
+  }: {
+    userId: number;
+    fileName: string;
+    filePath: string;
+  }) {
+    const file = await this.prisma.file.create({
+      data: { name: fileName, path: filePath },
+    });
+
     return this.prisma.user.update({
-      where: { id },
+      where: { id: userId },
       data: {
-        avatar,
+        avatarId: file.id,
+        // avatar: {
+        //   connect: { id: file.id },
+        // },
       },
     });
   }

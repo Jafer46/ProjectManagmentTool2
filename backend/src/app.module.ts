@@ -11,6 +11,8 @@ import { TaskModule } from './task/task.module';
 import { MessageModule } from './message/message.module';
 import { UserModule } from './user/user.module';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { FileModule } from './file/file.module';
+import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
   imports: [
@@ -28,6 +30,8 @@ import { DashboardModule } from './dashboard/dashboard.module';
     MessageModule,
     UserModule,
     DashboardModule,
+    FileModule,
+    MulterModule.register({ dest: './uploads' }),
   ],
   controllers: [AppController],
   providers: [AppService],

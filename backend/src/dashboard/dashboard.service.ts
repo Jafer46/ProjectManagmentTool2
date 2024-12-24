@@ -8,7 +8,7 @@ export class DashboardService {
   async getDashboard(userId: number) {
     return this.prisma.user.findUnique({
       where: { id: userId },
-      include: { projects: true, tasks: true },
+      include: { assignedProjects: true, assignedTasks: true },
     });
   }
 }

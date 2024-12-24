@@ -8,7 +8,8 @@ import { MessageService } from './message.service';
 import { CreateMessageDto } from './dto/create-message.dto';
 import { UpdateMessageDto } from './dto/update-message.dto';
 import { Server } from 'socket.io';
-import { OnModuleInit } from '@nestjs/common';
+import { OnModuleInit, UseInterceptors } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @WebSocketGateway({
   cors: {

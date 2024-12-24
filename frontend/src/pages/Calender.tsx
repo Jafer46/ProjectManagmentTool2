@@ -1,5 +1,4 @@
 import CalendarView from "@/components/CalenderView";
-import { ScrollArea } from "@radix-ui/react-scroll-area";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
 function CalenderPage() {

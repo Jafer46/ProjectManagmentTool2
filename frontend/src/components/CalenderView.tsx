@@ -11,7 +11,7 @@ export default function CalendarView() {
       {dates.map((index) => (
         <div
           className={cn(
-            "h-32 w-auto border flex p-2",
+            "h-32 w-auto border flex p-2 border-l-0",
             indices.includes(index) && "blur blur-high"
           )}
         >

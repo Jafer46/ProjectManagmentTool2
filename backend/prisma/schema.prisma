@@ -19,7 +19,7 @@ model User {
   username String @unique
   email String @unique
   password String
-  avatar String? 
+  avatarId Int? 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -29,6 +29,7 @@ model User {
   RefreshToken RefreshToken[]
   assignedTasks Task[] @relation("UserTasks")
   createdProjects Project[]
+  avatar File? @relation(fields: [avatarId], references: [id])
 }
 
 model Project {
@@ -93,4 +94,5 @@ model File {
 
   Task Task[]
   Message Message[]
+  User User[]
 }

@@ -25,10 +25,11 @@ export class UserService {
     id?: number;
     username?: string;
   }): Promise<UserTasksMessages | null> {
-    return this.prisma['user'].findUnique({
-      where: { id, username },
-      include: { tasks: true, messages: true, projects: true },
-    });
+    // return this.prisma['user'].findUnique({
+    //   where: { id, username },
+    //   include: { tasks: true, messages: true, projects: true },
+    // });
+    return null;
   }
 
   async createUser(data: Prisma.UserCreateInput): Promise<User> {

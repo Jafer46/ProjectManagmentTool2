@@ -3,15 +3,20 @@ import {
   Controller,
   Get,
   NotFoundException,
+  Post,
   Put,
   Req,
   UnauthorizedException,
+  UploadedFile,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { AuthGuard } from 'src/gurads/auth.guard';
 import { Request } from 'express';
 import { UpdateUserDTO } from './dto/update-user.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { storage } from 'src/file/disk.options';
 
 @UseGuards(AuthGuard)
 @Controller('user')
@@ -36,11 +41,21 @@ export class UserController {
   }
 
   @Put('id')
-  async changeProfilePic(@Req() req: Request, @Body() body: UpdateUserDTO) {
+  @UseInterceptors(FileInterceptor('file', { storage: storage }))
+  async changeProfilePic(
+    @Req() req: Request,
+    @Body() body: UpdateUserDTO,
+    @UploadedFile() file: Express.Multer.File,
+  ) {
     const userId = Number(req.user);
     if (userId == body.id) {
       throw new UnauthorizedException('User is not authorized');
     }
-    return this.userService.updateUser(body);
+
+    return this.userService.updateUser({
+      fileName: file.originalname,
+      filePath: file.filename,
+      userId,
+    });
   }
 }

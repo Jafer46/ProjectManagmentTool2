@@ -22,8 +22,8 @@ export class TaskController {
 
   @Get()
   async getTasks(@Req() req: Request) {
-    const userId = Number(req.user);
-    this.taskServices.getTasks({ where: { userId } });
+    const creatorId = Number(req.user);
+    this.taskServices.getTasks({ where: { creatorId } });
   }
 
   @Put('id')
