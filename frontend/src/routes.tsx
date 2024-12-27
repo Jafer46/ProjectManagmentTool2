@@ -10,6 +10,7 @@ import Settings from "./pages/Settings";
 import AddTasks from "./pages/AddTasks";
 import Messaging from "./pages/Messaging";
 import CalenderPage from "./pages/Calender";
+import ProjectPage from "./pages/Project";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,7 @@ const router = createBrowserRouter([
       { path: "create", element: <Create /> },
       { path: "settings", element: <Settings /> },
       { path: "message", element: <Messaging /> },
+      { path: "project", element: <ProjectPage /> },
     ],
   },
   {

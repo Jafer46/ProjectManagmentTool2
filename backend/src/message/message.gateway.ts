@@ -13,7 +13,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 
 @WebSocketGateway({
   cors: {
-    origin: 'http://localhost:5173', // Allow this origin
+    origin: true, // Allow this origin
     methods: ['GET', 'POST'],
     credentials: true,
   },
@@ -27,7 +27,9 @@ export class MessageGateway implements OnModuleInit {
   constructor(private readonly messageService: MessageService) {}
 
   onModuleInit() {
-    this.server.on('connect', (socket) => {});
+    this.server.on('connect', (socket) => {
+      console.log('connected');
+    });
   }
 
   @SubscribeMessage('joinChat')
