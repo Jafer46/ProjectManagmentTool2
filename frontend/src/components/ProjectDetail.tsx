@@ -1,6 +1,4 @@
 import { Project } from "@/schema";
-import { ScrollArea } from "./ui/scroll-area";
-import { Textarea } from "./ui/textarea";
 
 export default function ProjectDetail({ project }: { project: Project }) {
   return (
@@ -13,8 +11,14 @@ export default function ProjectDetail({ project }: { project: Project }) {
         </div>
         <div className="flex gap-2 border-b-2 w-full px-2">
           <label className="font-semibold">Priority:</label>
-          <div className="bg-high rounded-sm p-1">
+          <div className={`priority priority-${project.priority}`}>
             {project.priority.toUpperCase()}
+          </div>
+        </div>
+        <div className="flex gap-2 border-b-2 w-full px-2">
+          <label className="font-semibold">Status:</label>
+          <div className={`status status-${project.status}`}>
+            {project.status.toUpperCase()}
           </div>
         </div>
         <div className="flex gap-2 border-b-2 w-full px-2">

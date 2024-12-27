@@ -123,23 +123,28 @@ body {
   background-color: rgba(255, 255, 255, 0.8);
 }
 
-.progress {
+.status {
   font-weight: 500;
   border-radius: 4px;
   padding: 0.3rem 0.8rem;
 }
 /* for progress the is completed */
-.progress-2 {
+.status-ongoing {
   background-color: rgba(173, 243, 168, 0.329);
   color: rgb(47, 208, 7);
 }
-.progress-1 {
+.status-pending {
   background-color: rgba(243, 229, 168, 0.329);
   color: rgb(208, 174, 7);
 }
-.progress-0 {
+.status-overdue {
   background-color: rgba(243, 180, 168, 0.329);
   color: rgb(208, 31, 7);
+}
+
+.status-completed {
+  background-color: rgba(188, 185, 185, 0.329);
+  color: rgb(51, 51, 51);
 }
 
 /* for priority */
@@ -156,7 +161,7 @@ body {
 }
 .priority-medium {
   border-color: yellow;
-  color: yellow;
+  color: rgb(255, 221, 0);
 }
 .priority-low {
   border-color: green;

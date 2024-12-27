@@ -39,10 +39,12 @@ export interface Project {
   title: string;
   description?: string;
   priority: "medium" | "high" | "low";
-  status: number;
+  status: "ongoing" | "pending" | "overdue" | "completed";
   creatorId?: string | number;
   deadline: Date;
 
+  tasksCount?: number;
+  completedTasksCount?: number;
   tasks?: Task[];
   messages?: Message[];
   users?: User[];
