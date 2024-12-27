@@ -1,4 +1,6 @@
 import { Project } from "@/schema";
+import { ScrollArea } from "./ui/scroll-area";
+import { Textarea } from "./ui/textarea";
 
 export default function ProjectDetail({ project }: { project: Project }) {
   return (
@@ -18,6 +20,12 @@ export default function ProjectDetail({ project }: { project: Project }) {
         <div className="flex gap-2 border-b-2 w-full px-2">
           <label className="font-semibold">Deadline:</label>
           <div>{project.deadline.toLocaleDateString()}</div>
+        </div>
+        <div className="flex gap-2 border-b-2 w-full px-2">
+          <label className="font-semibold">Description:</label>
+          <textarea className="blur blur-low overflow-y-scroll w-full px-2 rounded-md custom-scroll">
+            {project.description}
+          </textarea>
         </div>
       </div>
     </div>

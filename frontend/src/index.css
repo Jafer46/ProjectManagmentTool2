@@ -69,6 +69,34 @@
     @apply bg-background text-foreground font-sans;
   }
 }
+@layer components {
+  .custom-scroll {
+    @apply scroll-m-1;
+  }
+
+  .custom-scroll::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  .custom-scroll::-webkit-scrollbar-track {
+    @apply rounded-full bg-gray-100;
+  }
+
+  .custom-scroll::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-gray-300;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .custom-scroll::-webkit-scrollbar-track {
+      @apply bg-neutral-700;
+    }
+
+    .custom-scroll::-webkit-scrollbar-thumb {
+      @apply bg-neutral-500;
+    }
+  }
+}
+
 * {
   font-weight: 400;
 }

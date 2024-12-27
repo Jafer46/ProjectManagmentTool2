@@ -8,6 +8,8 @@ const project: Project = {
   priority: "medium",
   status: 0,
   deadline: new Date(Date.now()),
+  description:
+    "The first explain pipe upward pole told rapidly tongue high down plan judge gentle missing start would experiment come mail choose sharp likely deer failed eastproject count ill everyone mainly number well constantly youth larger get name beside cost plane occur block level wise with molecular method opinion individual forgotto be jet particular anything therefore thrown to corn won onto gun purpose spider leaf understanding clear earlier people am wait poem afraid anyone welcome express",
 };
 
 export default function ProjectPage() {
