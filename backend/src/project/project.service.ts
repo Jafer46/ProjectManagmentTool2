@@ -18,6 +18,41 @@ export class ProjectService {
     return this.prisma.project.findMany();
   }
 
+  async getUserProjects(userId: number, take?: number) {
+    const user = await this.prisma.user.findUnique({
+      where: { id: userId },
+      include: {
+        assignedProjects: {
+          include: { users: true },
+        },
+      },
+    });
+
+    const projects = user.assignedProjects;
+
+    // Map through projects to add the counts
+    const projectsWithCounts = await Promise.all(
+      projects.map(async (project) => {
+        const totalTasks = await this.prisma.task.count({
+          where: { projectId: project.id },
+        });
+
+        const completedTasks = await this.prisma.task.count({
+          where: {
+            projectId: project.id,
+            completed: true,
+          },
+        });
+
+        return {
+          ...project,
+          totalTasks,
+          completedTasks,
+        };
+      }),
+    );
+  }
+
   async getProject(id: number): Promise<ProjectTasksMessages | null> {
     return this.prisma.project.findUnique({
       where: { id },

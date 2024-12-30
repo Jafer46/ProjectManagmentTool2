@@ -1,4 +1,3 @@
-import userIcon from "../assets/user.png";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 export default function AvatarCircle({

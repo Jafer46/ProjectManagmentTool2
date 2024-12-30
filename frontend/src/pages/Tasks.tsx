@@ -12,6 +12,7 @@ import useAuth from "@/store";
 import { Button } from "../components/ui/button";
 import { getUserTasks, updateTask } from "@/api/taskApi";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import TasksTable from "@/components/tasksTable";
 
 export default function Tasks() {
   const { token } = useAuth();
@@ -45,41 +46,5 @@ export default function Tasks() {
     task.completed = true;
     taskMutation.mutate(task);
   };
-  return (
-    <div className="w-full blur blur-high rounded-lg p-4 ">
-      <div className="text-xl font-semibold mb-2">Table of Tasks</div>
-      <Table>
-        {(!tasks || tasks.length === 0) && (
-          <TableCaption>There are no tasks.</TableCaption>
-        )}
-        <TableHeader>
-          <TableRow>
-            <TableHead className="max-w-[50px]">Title</TableHead>
-            <TableHead className="max-w-[50px]">Description</TableHead>
-            <TableHead className="max-w-[50px]">Status</TableHead>
-            <TableHead className="max-w-[50px]">Action</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {tasks &&
-            tasks.map((task: Task) => (
-              <TableRow key={task.id}>
-                <TableCell className="max-w-[50px]">{task.title}</TableCell>
-                <TableCell className="max-w-[50px]">
-                  {task.description}
-                </TableCell>
-                <TableCell className="max-w-[50px]">
-                  {task.completed ? "Completed" : "Pending"}
-                </TableCell>
-                <TableCell>
-                  {!task.completed && (
-                    <Button onClick={() => update(task)}>Set Completed</Button>
-                  )}
-                </TableCell>
-              </TableRow>
-            ))}
-        </TableBody>
-      </Table>
-    </div>
-  );
+  return <TasksTable tasks={tasks} update={update} />;
 }

@@ -48,6 +48,7 @@ export interface Project {
   tasks?: Task[];
   messages?: Message[];
   users?: User[];
+  creator?: User[];
 }
 
 const fileSizeLimit = 5 * 1024 * 1024; // 5MB

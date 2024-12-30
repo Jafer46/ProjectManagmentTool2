@@ -27,16 +27,7 @@ export default function ProjectCard({ project }: { project?: Project }) {
       </div>
     );
   }
-  let status = "";
-  if (project.status === 0) {
-    status = "Not start";
-  }
-  if (project.status === 1) {
-    status = "In progress";
-  }
-  if (project.status === 2) {
-    status = "Finished";
-  }
+  let status = project.status;
 
   const admin = project.users?.find((user) => user.id == project.creatorId);
   const finishedTasks =
@@ -54,7 +45,7 @@ export default function ProjectCard({ project }: { project?: Project }) {
         <p className="font-semibold">By:{admin?.username}</p>
       </div>
       <div className="flex justify-between">
-        <div className={`progress progress-${project.status}`}>{status}</div>
+        <div className={`status status-${project.status}`}>{status}</div>
         <div className={`priority priority-${project.priority}`}>
           {project.priority.toUpperCase()}
         </div>
