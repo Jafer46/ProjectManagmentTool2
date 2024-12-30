@@ -20,7 +20,7 @@ function Dashboard() {
   const { token } = useAuth();
 
   const { data } = useQuery<any, Error>({
-    queryKey: ["data"],
+    queryKey: ["dashboard"],
     queryFn: () => getDashboard(token),
   });
   return (
