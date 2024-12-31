@@ -1,4 +1,4 @@
-import { Task } from "@/schema";
+import { Task } from "@/types/schema";
 import {
   Table,
   TableBody,

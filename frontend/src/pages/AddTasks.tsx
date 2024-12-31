@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/table";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
-import { Task, User } from "../schema";
+import { Task, User } from "../types/schema";
 import { Input } from "@/components/ui/input";
 import {
   Select,

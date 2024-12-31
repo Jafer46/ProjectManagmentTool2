@@ -3,7 +3,7 @@ import ProjectDetail from "@/components/ProjectDetail";
 import TasksTable from "@/components/tasksTable";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { Project, Task } from "@/schema";
+import { Project, Task } from "@/types/schema";
 import { TabsContent } from "@radix-ui/react-tabs";
 import React from "react";
 

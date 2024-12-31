@@ -1,15 +1,5 @@
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { Task } from "@/schema";
+import { Task } from "@/types/schema";
 import useAuth from "@/store";
-import { Button } from "../components/ui/button";
 import { getUserTasks, updateTask } from "@/api/taskApi";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import TasksTable from "@/components/tasksTable";
@@ -46,5 +36,6 @@ export default function Tasks() {
     task.completed = true;
     taskMutation.mutate(task);
   };
+
   return <TasksTable tasks={tasks} update={update} />;
 }

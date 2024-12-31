@@ -1,6 +1,6 @@
 import { getUserProjects } from "@/api/projectApi";
 import ProjectCard from "@/components/projectCard";
-import { Project } from "@/schema";
+import { Project } from "@/types/schema";
 import useAuth from "@/store";
 import { useQuery } from "@tanstack/react-query";
 

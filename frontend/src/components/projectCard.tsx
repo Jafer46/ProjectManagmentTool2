@@ -1,7 +1,7 @@
 import { Progress } from "@/components/ui/progress";
 import AvatarCircle from "./avatarCircle";
 import UserList from "./userList";
-import { Project } from "@/schema";
+import { Project } from "@/types/schema";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
 

@@ -1,4 +1,4 @@
-import { Project } from "@/schema";
+import { Project } from "@/types/schema";
 
 export default function ProjectDetail({ project }: { project: Project }) {
   return (

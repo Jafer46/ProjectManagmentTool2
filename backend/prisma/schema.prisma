@@ -28,6 +28,8 @@ model User {
   RefreshToken RefreshToken[]
   assignedTasks Task[] @relation("UserTasks")
   avatar File? @relation(fields: [avatarId], references: [id])
+
+  notifications Notification[]
 }
 
 model Project {
@@ -35,10 +37,11 @@ model Project {
   title String
   description String
   priority String
-  status Int @default(0)
+  status String @default("pending")
   creatorId Int
   deadline DateTime
   type String
+  completedAt DateTime?
 
   tasks Task[]
   messages Message[]
@@ -53,6 +56,7 @@ model Task {
   description String
   completed Boolean @default(false)
   createdAt DateTime @default(now())
+  completedAt DateTime?
 
   fileId Int?
   projectId Int 
@@ -91,4 +95,14 @@ model File {
   Task Task[]
   Message Message[]
   User User[]
+}
+
+model Notification {
+  id Int @id @default(autoincrement())
+  type String
+  description String
+  userId Int
+  seen Boolean @default(false)
+
+  user User @relation(fields: [userId], references: [id])
 }

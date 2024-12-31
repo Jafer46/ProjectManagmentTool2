@@ -2,7 +2,7 @@
 import UserMessgeCard from "./UserMessageCard";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useState } from "react";
-import { User } from "@/schema";
+import { User } from "@/types/schema";
 
 const userMessage: User[] = [];
 export default function UserMessageList() {
