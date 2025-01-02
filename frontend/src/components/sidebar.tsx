@@ -28,8 +28,8 @@ export default function Sidebar({ expanded, setExpanded }: any) {
       className={classnames(
         "transition-all duration-300 ease-in-out rounded-lg",
         {
-          "blur blur-low md:w-[226px] h-full opacity-100": expanded,
-          "h-0 opacity-0 md:opacity-100 md:h-full md:w-[44px] overflow-hidden":
+          "blur blur-high md:w-[226px] h-full": expanded,
+          "h-0 blur blur-low opacity-0 md:opacity-100 md:h-full md:w-[44px] overflow-hidden":
             !expanded,
         }
       )}

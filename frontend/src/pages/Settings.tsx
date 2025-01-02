@@ -1,6 +1,6 @@
 import SubmitButton from "@/components/SubmitButton";
 import { useToast } from "@/components/ui/use-toast";
-import { userSchema } from "@/types/schema";
+import { userSchema } from "@/types/formSchma";
 import useAuth from "@/store/store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormFieldType } from "../../constants";

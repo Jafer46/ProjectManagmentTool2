@@ -13,6 +13,7 @@ import { UserModule } from './user/user.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { FileModule } from './file/file.module';
 import { MulterModule } from '@nestjs/platform-express';
+import { TimeModule } from './time/time.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { MulterModule } from '@nestjs/platform-express';
     DashboardModule,
     FileModule,
     MulterModule.register({ dest: './uploads' }),
+    TimeModule,
   ],
   controllers: [AppController],
   providers: [AppService],
