@@ -3,7 +3,7 @@ import Sidebar from "./components/sidebar";
 import { Navigate, Outlet } from "react-router-dom";
 import TopBar from "./components/topBar";
 import { ScrollArea } from "./components/ui/scroll-area";
-import useAuth from "./store";
+import useAuth from "./store/store";
 
 export default function Layout() {
   const [expanded, setExpanded] = useState(true);

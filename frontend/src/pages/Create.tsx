@@ -1,7 +1,7 @@
 import { createProject } from "@/api/projectApi";
 import SubmitButton from "@/components/SubmitButton";
 import { projectSchema } from "@/types/schema";
-import useAuth from "@/store";
+import useAuth from "@/store/store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormFieldType } from "../../constants";
 import { useState } from "react";

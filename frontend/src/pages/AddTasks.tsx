@@ -29,7 +29,7 @@ import {
   updateTask,
 } from "@/api/taskApi";
 import { useToast } from "@/components/ui/use-toast";
-import useAuth from "@/store";
+import useAuth from "@/store/store";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import UserList from "@/components/userList";
 

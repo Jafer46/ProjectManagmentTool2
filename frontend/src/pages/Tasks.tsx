@@ -1,5 +1,5 @@
 import { Task } from "@/types/schema";
-import useAuth from "@/store";
+import useAuth from "@/store/store";
 import { getUserTasks, updateTask } from "@/api/taskApi";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import TasksTable from "@/components/tasksTable";

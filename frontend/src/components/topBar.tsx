@@ -1,4 +1,4 @@
-import useAuth from "@/store";
+import useAuth from "@/store/store";
 import notificationIcon from "../assets/notification.png";
 import AvatarCircle from "./avatarCircle";
 import { useEffect } from "react";

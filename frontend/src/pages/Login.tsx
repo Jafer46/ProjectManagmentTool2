@@ -5,7 +5,7 @@ import CustomFormField from "../components/CustomFormField";
 import { z } from "zod";
 import { FormFieldType } from "../../constants";
 import SubmitButton from "../components/SubmitButton";
-import useAuth from "@/store";
+import useAuth from "@/store/store";
 import { useState } from "react";
 import { loginUser } from "../api/userApi";
 import { useNavigate } from "react-router-dom";

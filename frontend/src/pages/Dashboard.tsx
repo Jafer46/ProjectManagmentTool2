@@ -11,7 +11,7 @@ import TaskListCard from "../components/taskListCard";
 import { chartConfig } from "../../constants";
 import { chartData } from "../../constants";
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
-import useAuth from "@/store";
+import useAuth from "@/store/store";
 import { Calendar } from "@/components/ui/calendar";
 import { useQuery } from "@tanstack/react-query";
 import { getDashboard } from "@/api/userApi";

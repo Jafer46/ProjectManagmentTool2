@@ -3,7 +3,7 @@ import { routes } from "../../constants";
 import logoutImg from "../assets/logout.png";
 import mainIcon from "../assets/mainicon.png";
 import classnames from "classnames";
-import useAuth from "@/store";
+import useAuth from "@/store/store";
 import { useIsMobile } from "@/hooks/use-mobile";
 import React from "react";
 

@@ -1,7 +1,7 @@
 import { getUserProjects } from "@/api/projectApi";
 import ProjectCard from "@/components/projectCard";
 import { Project } from "@/types/schema";
-import useAuth from "@/store";
+import useAuth from "@/store/store";
 import { useQuery } from "@tanstack/react-query";
 
 export default function Projects() {

@@ -1,7 +1,7 @@
 import SubmitButton from "@/components/SubmitButton";
 import { useToast } from "@/components/ui/use-toast";
 import { userSchema } from "@/types/schema";
-import useAuth from "@/store";
+import useAuth from "@/store/store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormFieldType } from "../../constants";
 import { useState } from "react";
