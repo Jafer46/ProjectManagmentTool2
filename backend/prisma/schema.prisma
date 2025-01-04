@@ -56,11 +56,13 @@ model Task {
   description String
   completed Boolean @default(false)
   createdAt DateTime @default(now())
+  deadline DateTime? 
   completedAt DateTime?
 
   fileId Int?
   projectId Int 
   creatorId Int
+
   project Project @relation(fields: [projectId], references: [id])
   file File? @relation(fields: [fileId], references: [id])
   assignedUsers User[] @relation("UserTasks")  
@@ -84,6 +86,7 @@ model RefreshToken {
   token String
   userId Int
   expiryDate DateTime @default(now())
+
   user User @relation(references: [id], fields: [id])
 }
 

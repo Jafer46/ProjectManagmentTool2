@@ -88,7 +88,7 @@ export default function UserSelection({
                 {users &&
                   users.map((user) => (
                     <CommandItem
-                      key={user._id}
+                      key={user.id}
                       value={user.username}
                       onSelect={() => {
                         setSelectedUsers((prev: User[]) => {
@@ -96,7 +96,7 @@ export default function UserSelection({
                           if (
                             prev.find(
                               (selectedUser: User) =>
-                                selectedUser._id === user._id
+                                selectedUser.id === user.id
                             )
                           ) {
                             return prev; // Return the previous state if the user is already selected
@@ -126,9 +126,9 @@ export default function UserSelection({
           {selectedUsers &&
             selectedUsers.map((user) => (
               <Popover
-                key={user._id}
-                open={popoverStates[user._id]}
-                onOpenChange={() => togglePopover(user._id)}
+                key={user.id}
+                open={popoverStates[user.id]}
+                onOpenChange={() => togglePopover(user.id)}
               >
                 <PopoverTrigger asChild>
                   <div className="flex flex-col items-center overflow-hidden gap-1">
@@ -141,9 +141,9 @@ export default function UserSelection({
                     variant="destructive"
                     onClick={() => {
                       setSelectedUsers((prev: User[]) =>
-                        prev.filter((u: User) => u._id !== user._id)
+                        prev.filter((u: User) => u.id !== user.id)
                       );
-                      togglePopover(user._id); // Close popover after removing
+                      togglePopover(user.id); // Close popover after removing
                     }}
                   >
                     remove
