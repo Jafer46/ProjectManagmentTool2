@@ -28,7 +28,18 @@ export class MessageGateway implements OnModuleInit {
 
   onModuleInit() {
     this.server.on('connect', (socket) => {
+      const userId = socket.handshake.query.userId;
       console.log('connected');
+
+      if (userId) {
+        this.messageService.updateUserStatus(Number(userId), true);
+      }
+
+      socket.on('disconnect', async () => {
+        if (userId) {
+          await this.messageService.updateUserStatus(Number(userId), false);
+        }
+      });
     });
   }
 

@@ -19,7 +19,6 @@ export class AuthService {
 
   async singup(singupData: SignupDTO) {
     const { email, username, password } = singupData;
-    console.log(password);
 
     const user = await this.prisma.user.findFirst({
       where: { email, username },

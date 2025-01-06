@@ -22,6 +22,7 @@ model User {
   avatarId Int? 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  isOnline Boolean @default(false)
 
   messages Message[]
   assignedProjects Project[] @relation("UserPorjects")

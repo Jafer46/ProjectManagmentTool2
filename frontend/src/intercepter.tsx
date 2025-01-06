@@ -17,4 +17,4 @@
 // export default useAxiosInstance
 
 //export const baseURL = 'https://codesoftlevel3task2backend.onrender.com/api'
-export const baseURL = "http://localhost:3000";
+export const baseURL = "http://localhost:5000";

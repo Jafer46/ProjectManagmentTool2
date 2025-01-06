@@ -42,6 +42,14 @@ export class MessageService {
       },
     });
   }
+  async updateUserStatus(userId: number, status: boolean) {
+    return this.prisma.user.update({
+      where: { id: userId },
+      data: {
+        isOnline: status,
+      },
+    });
+  }
 
   async remove(id: number) {
     return this.prisma.message.delete({ where: { id } });

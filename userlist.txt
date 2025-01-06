@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "username": "user_one",
+    "email": "user_one@example.com",
+    "password": "hashed_password_1",
+    "avatarId": 101,
+    "createdAt": "2023-01-01T12:00:00Z",
+    "updatedAt": "2023-01-02T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "username": "user_two",
+    "email": "user_two@example.com",
+    "password": "hashed_password_2",
+    "avatarId": 102,
+    "createdAt": "2023-02-01T12:00:00Z",
+    "updatedAt": "2023-02-02T12:00:00Z"
+  },
+  {
+    "id": 3,
+    "username": "user_three",
+    "email": "user_three@example.com",
+    "password": "hashed_password_3",
+    "avatarId": null,
+    "createdAt": "2023-03-01T12:00:00Z",
+    "updatedAt": "2023-03-02T12:00:00Z"
+  },
+  {
+    "id": 4,
+    "username": "user_four",
+    "email": "user_four@example.com",
+    "password": "hashed_password_4",
+    "avatarId": 104,
+    "createdAt": "2023-04-01T12:00:00Z",
+    "updatedAt": "2023-04-02T12:00:00Z"
+  },
+  {
+    "id": 5,
+    "username": "user_five",
+    "email": "user_five@example.com",
+    "password": "hashed_password_5",
+    "avatarId": 105,
+    "createdAt": "2023-05-01T12:00:00Z",
+    "updatedAt": "2023-05-02T12:00:00Z"
+  }
+]
