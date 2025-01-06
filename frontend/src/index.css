@@ -111,6 +111,9 @@
       @apply bg-neutral-500;
     }
   }
+
+  .sidebar-link {
+  }
 }
 
 * {

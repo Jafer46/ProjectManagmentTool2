@@ -14,7 +14,7 @@ export const createProject = (data: any, token: string) => {
 
 export const getUserProjects = (token: string) =>
   axios
-    .get(`${baseURL}/project/user`, {
+    .get(`${baseURL}/project`, {
       headers: { Authorization: `Bearer ${token}` },
     })
     .then((res) => res.data)

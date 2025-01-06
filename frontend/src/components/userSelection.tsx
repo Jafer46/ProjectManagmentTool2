@@ -30,29 +30,50 @@ export default function UserSelection({
 }) {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
+  const [debouncingValue, setDebouncingValue] = React.useState("");
   const { toast } = useToast();
   const [popoverStates, setPopoverStates] = React.useState<{
     [key: string]: boolean;
   }>({});
 
-  const searchUser = async (value: string) => {
-    try {
-      const users = await search(value);
-      console.log(users);
-      setUsers(users);
-    } catch (err: any) {
-      toast({
-        title: "error",
-        description: err.message,
-      });
+  useEffect(() => {
+    const searchUser = async (searchValue: string) => {
+      try {
+        const users = await search(searchValue);
+        setUsers(users);
+      } catch (err: any) {
+        toast({
+          title: "error",
+          description: err.message,
+        });
+      }
+    };
+
+    if (debouncingValue) {
+      searchUser(debouncingValue);
     }
-  };
+  }, [debouncingValue]);
 
   useEffect(() => {
     if (!users || users.length === 0) {
       setValue(""); // Reset selected value if users are cleared
     }
   }, [users, selectedUsers]);
+
+  useEffect(() => {
+    let timeoutId: NodeJS.Timeout; // Declare a variable to hold the timeout ID
+
+    if (value) {
+      timeoutId = setTimeout(() => {
+        setDebouncingValue(value);
+      }, 1000);
+    }
+
+    // Cleanup function to clear the timeout
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [value]);
 
   const togglePopover = (id: string) => {
     setPopoverStates((prev) => ({
@@ -80,7 +101,7 @@ export default function UserSelection({
             <CommandInput
               placeholder="Search user..."
               className="h-9"
-              onChangeCapture={(e: any) => searchUser(e.target.value)}
+              onChangeCapture={(e: any) => setValue(e.target.value)}
             />
             <CommandList>
               <CommandEmpty>No user found.</CommandEmpty>

@@ -8,25 +8,25 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 export default function Projects() {
   const { token, user } = useAuth();
 
-  // const { data: projects } = useQuery<Project[], Error>({
-  //   queryKey: ['Projects'],
-  //   queryFn: () => getUserProjects(token)
-  // })
+  const { data: projects } = useQuery<Project[], Error>({
+    queryKey: ["Projects"],
+    queryFn: () => getUserProjects(token),
+  });
 
-  const projects = [
-    {
-      id: "1",
-      title: "First Project",
-      priority: "medium",
-      status: "completed",
-      deadline: new Date(Date.now()),
-      description:
-        "The first explain pipe upward pole told rapidly tongue high down plan judge gentle missing start would experiment come mail choose sharp likely deer failed eastproject count ill everyone mainly number well constantly youth larger get name beside cost plane occur block level wise with molecular method opinion individual forgotto be jet particular anything therefore thrown to corn won onto gun purpose spider leaf understanding clear earlier people am wait poem afraid anyone welcome express",
-    } as Project,
-  ];
+  // const projects = [
+  //   {
+  //     id: "1",
+  //     title: "First Project",
+  //     priority: "medium",
+  //     status: "completed",
+  //     deadline: new Date(Date.now()),
+  //     description:
+  //       "The first explain pipe upward pole told rapidly tongue high down plan judge gentle missing start would experiment come mail choose sharp likely deer failed eastproject count ill everyone mainly number well constantly youth larger get name beside cost plane occur block level wise with molecular method opinion individual forgotto be jet particular anything therefore thrown to corn won onto gun purpose spider leaf understanding clear earlier people am wait poem afraid anyone welcome express",
+  //   } as Project,
+  // ];
 
   return (
-    <Tabs className="w-full px-4 ">
+    <Tabs className="w-full px-4 " defaultValue="projects">
       <TabsList className="grid w-full grid-cols-3 mb-2 blur blur-low">
         <TabsTrigger value="projects">All Projects</TabsTrigger>
         <TabsTrigger value="myPorjects">My project</TabsTrigger>

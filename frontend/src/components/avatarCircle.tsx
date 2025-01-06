@@ -10,7 +10,9 @@ export default function AvatarCircle({
   return (
     <Avatar>
       <AvatarImage src={url} />
-      <AvatarFallback>{username?.charAt(0).toString() ?? "CN"}</AvatarFallback>
+      <AvatarFallback>
+        {username?.charAt(0).toString().toUpperCase() ?? "CN"}
+      </AvatarFallback>
     </Avatar>
   );
 }

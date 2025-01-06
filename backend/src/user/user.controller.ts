@@ -18,7 +18,7 @@ import { UpdateUserDTO } from './dto/update-user.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { storage } from 'src/file/disk.options';
 
-@UseGuards(AuthGuard)
+// @UseGuards(AuthGuard)
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
@@ -36,7 +36,8 @@ export class UserController {
 
   @Get('/search')
   async searchUser(@Req() req: Request) {
-    const searchString = req.query.toString();
+    const searchString = req.query.query.toString();
+    console.log(searchString);
     return this.userService.searchUser(searchString);
   }
 

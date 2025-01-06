@@ -85,14 +85,18 @@ export default function Sidebar({ expanded, setExpanded }: any) {
           );
         })}
         <div
-          className="flex gap-2 mt-auto p-4"
+          className={classnames({
+            "font-semibold text-lg flex gap-2 mt-auto mx-4 mb-2 hover:text-[#d9b906] hover:border-[#d9b906] hover:border-r-4":
+              true,
+            "mx-0 flex justify-center": !expanded,
+          })}
           onClick={() => {
             logout();
             navigate("/login");
           }}
         >
-          <img src={logoutImg} alt="logout" className="w-[24px] h-[24px]" />
-          <p className="font-semibold">Logout</p>
+          <img src={logoutImg} alt="logout" className="min-w-[24px] h-[24px]" />
+          <span className={classnames({ hidden: !expanded })}>Logout</span>
         </div>
       </nav>
     </section>

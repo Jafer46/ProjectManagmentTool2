@@ -29,7 +29,7 @@ export class ProjectController {
   async getProjects(@Req() req) {
     const userId = req.user;
     const user = await this.userService.getUser({ id: userId });
-    return user.projects;
+    return user?.projects ?? [];
   }
 
   @Get('id')
