@@ -10,7 +10,9 @@ export class UserService {
   }
 
   async searchUser(searchString: string) {
-    return this.prisma.user.findFirst({ where: { username: searchString } });
+    return (
+      this.prisma.user.findFirst({ where: { username: searchString } }) ?? []
+    );
   }
 
   async updateUser({

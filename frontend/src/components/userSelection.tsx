@@ -16,6 +16,7 @@ import AvatarCircle from "./avatarCircle";
 import { search } from "@/api/userApi";
 import { useToast } from "./ui/use-toast";
 import { User } from "@/types/schema";
+import useDebounce from "@/hooks/use-debounce";
 
 export default function UserSelection({
   users,
@@ -30,16 +31,17 @@ export default function UserSelection({
 }) {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
-  const [debouncingValue, setDebouncingValue] = React.useState("");
   const { toast } = useToast();
   const [popoverStates, setPopoverStates] = React.useState<{
     [key: string]: boolean;
   }>({});
+  const debouncingValue = useDebounce(value);
 
   useEffect(() => {
     const searchUser = async (searchValue: string) => {
       try {
         const users = await search(searchValue);
+        console.log(users);
         setUsers(users);
       } catch (err: any) {
         toast({
@@ -59,21 +61,6 @@ export default function UserSelection({
       setValue(""); // Reset selected value if users are cleared
     }
   }, [users, selectedUsers]);
-
-  useEffect(() => {
-    let timeoutId: NodeJS.Timeout; // Declare a variable to hold the timeout ID
-
-    if (value) {
-      timeoutId = setTimeout(() => {
-        setDebouncingValue(value);
-      }, 1000);
-    }
-
-    // Cleanup function to clear the timeout
-    return () => {
-      clearTimeout(timeoutId);
-    };
-  }, [value]);
 
   const togglePopover = (id: string) => {
     setPopoverStates((prev) => ({
@@ -106,36 +93,34 @@ export default function UserSelection({
             <CommandList>
               <CommandEmpty>No user found.</CommandEmpty>
               <CommandGroup>
-                {users &&
-                  users.map((user) => (
-                    <CommandItem
-                      key={user.id}
-                      value={user.username}
-                      onSelect={() => {
-                        setSelectedUsers((prev: User[]) => {
-                          // Check if the user is already selected
-                          if (
-                            prev.find(
-                              (selectedUser: User) =>
-                                selectedUser.id === user.id
-                            )
-                          ) {
-                            return prev; // Return the previous state if the user is already selected
-                          }
-                          return [...prev, user]; // Add the new user if not already selected
-                        });
-                        setOpen(false);
-                      }}
-                    >
-                      {user.username}
-                      <CheckIcon
-                        className={cn(
-                          "ml-auto h-4 w-4",
-                          value === user.username ? "opacity-100" : "opacity-0"
-                        )}
-                      />
-                    </CommandItem>
-                  ))}
+                {users?.map((user) => (
+                  <CommandItem
+                    key={user.id}
+                    value={user.username}
+                    onSelect={() => {
+                      setSelectedUsers((prev: User[]) => {
+                        // Check if the user is already selected
+                        if (
+                          prev.find(
+                            (selectedUser: User) => selectedUser.id === user.id
+                          )
+                        ) {
+                          return prev; // Return the previous state if the user is already selected
+                        }
+                        return [...prev, user]; // Add the new user if not already selected
+                      });
+                      setOpen(false);
+                    }}
+                  >
+                    {user.username}
+                    <CheckIcon
+                      className={cn(
+                        "ml-auto h-4 w-4",
+                        value === user.username ? "opacity-100" : "opacity-0"
+                      )}
+                    />
+                  </CommandItem>
+                ))}
               </CommandGroup>
             </CommandList>
           </Command>

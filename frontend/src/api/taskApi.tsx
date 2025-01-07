@@ -22,7 +22,7 @@ export const getPorjectTasks = (projectId: string, token: string) =>
     });
 export const getUserTasks = (token: string) =>
   axios
-    .get(`${baseURL}/user/task`, {
+    .get(`${baseURL}/task`, {
       headers: { Authorization: `Bearer ${token}` },
     })
     .then((res) => res.data)

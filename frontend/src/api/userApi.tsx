@@ -44,6 +44,7 @@ export const updateUser = (userData: User) =>
     .catch((err) => {
       throw err;
     });
+
 export const getDashboard = (token: string) =>
   axios
     .get(`${baseURL}/user/dashboerd`, {
