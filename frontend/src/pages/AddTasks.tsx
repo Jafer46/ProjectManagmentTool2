@@ -9,7 +9,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Task, User } from "../types/schema";
 import { Input } from "@/components/ui/input";
@@ -22,34 +21,39 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  createTask,
-  deleteTask,
-  getPorjectTasks,
-  updateTask,
-} from "@/api/taskApi";
+import { getPorjectTasks } from "@/api/taskApi";
 import { useToast } from "@/components/ui/use-toast";
-import useAuth from "@/store/store";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import UserList from "@/components/userList";
+import useAddTasks from "@/hooks/add-taks";
 
 export default function AddTasks() {
-  const [expanded, setExpanded] = useState(false);
-  const [assignedUsers, setAssignedUsers] = useState<number[]>([]);
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const {
+    title,
+    description,
+    assignedUsers,
+    setTitle,
+    setAssignedUsers,
+    setDescription,
+    setExpanded,
+    expanded,
+    user,
+    taskMutation,
+    createTasks,
+    deleteTasks,
+    token,
+  } = useAddTasks();
   const { state } = useLocation();
-  const { toast } = useToast();
-  const { user, token } = useAuth();
   const { project, users } = state;
-  const queryClient = useQueryClient();
+  const { toast } = useToast();
 
   const close = () => {
     setExpanded(false);
     setTitle("");
     setDescription("");
   };
-  const create = () => {
+
+  const taskCreate = () => {
     if (
       !title ||
       !description ||
@@ -74,51 +78,16 @@ export default function AddTasks() {
     });
     close();
   };
+
   const taskDelete = (taskId: string) => {
     deleteTasks.mutate(taskId);
   };
-
-  const createTasks = useMutation({
-    mutationFn: (task: Task) => createTask(task, token),
-    onSuccess: (savedTask) => {
-      queryClient.setQueryData(["Tasks"], (tasks: Task[]) => [
-        ...(tasks || []),
-        savedTask,
-      ]);
-    },
-  });
-
-  const deleteTasks = useMutation({
-    mutationFn: (taskId: string) => deleteTask(taskId, token),
-    onSuccess: (deletedTask: Task) => {
-      queryClient.setQueryData(["Tasks"], (tasks: Task[]) =>
-        tasks.filter((task) => task.id !== deletedTask.id)
-      );
-    },
-  });
 
   const { data: tasks } = useQuery<Task[], Error>({
     queryKey: ["Tasks"],
     queryFn: () => getPorjectTasks(project.id, token),
   });
-  const taskMutation = useMutation({
-    mutationFn: (task: Task) => updateTask(task, token),
-    onSuccess: (savedTask: Task) => {
-      queryClient.setQueryData(["Tasks"], (oldTasks: Task[]) => {
-        // Find the index of the task to update
-        const index = oldTasks.findIndex((t) => t.id === savedTask.id);
 
-        // If the task exists, update it; if not, return the old tasks
-        if (index > -1) {
-          const updatedTasks = [...oldTasks];
-          updatedTasks[index] = savedTask; // Update the task
-          return updatedTasks;
-        }
-
-        return oldTasks; // Return the old tasks if not found
-      });
-    },
-  });
   const update = (task: Task) => {
     task.completed = true;
     taskMutation.mutate(task);
@@ -215,10 +184,10 @@ export default function AddTasks() {
                 </Select>
               </TableCell>
               <TableCell className="flex flex-wrap gap-2 p-0 m-0">
-                <Button variant="default" onClick={() => create()}>
+                <Button variant="default" onClick={taskCreate}>
                   save
                 </Button>
-                <Button variant="destructive" onClick={() => close()}>
+                <Button variant="destructive" onClick={close}>
                   X
                 </Button>
               </TableCell>
