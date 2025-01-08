@@ -7,7 +7,8 @@ export class TimeController {
   constructor(private readonly timeService: TimeService) {}
 
   @Post()
-  async getCalendar(@Body() body: GetCalendarDto) {
-    return this.timeService.getCalendar(body);
+  async getCalendar(@Body() body) {
+    const { date } = body;
+    return this.timeService.getCalendar(date);
   }
 }

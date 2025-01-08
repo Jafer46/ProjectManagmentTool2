@@ -1,14 +1,16 @@
 import { getCalendar } from "@/api/calendar";
 import CalendarView from "@/components/CalenderView";
+import Loading from "@/components/loading";
 import { useQuery } from "@tanstack/react-query";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import React from "react";
 
+const date = {
+  month: new Date(Date.now()).getMonth(),
+  year: new Date(Date.now()).getFullYear(),
+};
+
 function CalenderPage() {
-  const date = {
-    month: new Date(Date.now()).getMonth(),
-    year: new Date(Date.now()).getFullYear(),
-  };
   const [month, setMonth] = React.useState(date);
 
   const { isLoading, data, error } = useQuery({
@@ -37,6 +39,12 @@ function CalenderPage() {
       });
     }
   };
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  console.log(data);
 
   return (
     <div className="mt-8">

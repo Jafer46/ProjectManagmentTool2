@@ -98,16 +98,16 @@ export default function UserSelection({
                     key={user.id}
                     value={user.username}
                     onSelect={() => {
-                      setSelectedUsers((prev: User[]) => {
+                      setSelectedUsers((users: User[]) => {
                         // Check if the user is already selected
                         if (
-                          prev.find(
+                          users.find(
                             (selectedUser: User) => selectedUser.id === user.id
                           )
                         ) {
-                          return prev; // Return the previous state if the user is already selected
+                          return users; // Return the previous state if the user is already selected
                         }
-                        return [...prev, user]; // Add the new user if not already selected
+                        return [...users, user]; // Add the new user if not already selected
                       });
                       setOpen(false);
                     }}

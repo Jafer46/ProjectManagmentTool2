@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const getCalendar = (date: any) =>
   axios
-    .get(`${baseURL}/calendar/${date}`)
+    .post(`${baseURL}/calendar/`, { date })
     .then((res) => res.data)
     .catch((err) => {
       throw err;

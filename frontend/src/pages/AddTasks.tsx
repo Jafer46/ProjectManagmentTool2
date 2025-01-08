@@ -25,7 +25,7 @@ import { getPorjectTasks } from "@/api/taskApi";
 import { useToast } from "@/components/ui/use-toast";
 import { useQuery } from "@tanstack/react-query";
 import UserList from "@/components/userList";
-import useAddTasks from "@/hooks/add-taks";
+import useAddTasks from "@/hooks/use-add-taks";
 
 export default function AddTasks() {
   const {
@@ -76,6 +76,7 @@ export default function AddTasks() {
       id: 0,
       completed: false,
     });
+
     close();
   };
 
