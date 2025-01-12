@@ -26,7 +26,7 @@ export const Create = () => {
     defaultValues: {
       title: "",
       description: "",
-      deadline: new Date(),
+      deadline: new Date(Date.now()),
       priority: "",
       type: "group",
     },
@@ -44,7 +44,7 @@ export const Create = () => {
     setLoading(true);
     let userList: string[] = [];
     selectedUsers.forEach((user) => {
-      userList.push(user._id);
+      userList.push(user.id);
     });
     try {
       const data = await createProject({ ...values, userList }, token);
@@ -81,7 +81,7 @@ export const Create = () => {
               <CustomFormField
                 fieldType={FormFieldType.DATE_PICKER}
                 control={form.control}
-                name="date"
+                name="deadline"
                 label="Deadline"
               />
             </div>

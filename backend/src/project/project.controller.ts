@@ -44,7 +44,10 @@ export class ProjectController {
 
   @Post()
   async createProject(@Req() req, @Body() body) {
-    const {} = body;
+    const creatorId = req.user;
+    const { title, description, userList, deadline, priority, type } = body;
+    body.creatorId = creatorId;
+    this.projectService.createProject(body);
   }
 
   @Put('id')
