@@ -42,7 +42,7 @@ export default function UserSelection({
       try {
         const users = await search(searchValue);
         console.log(users);
-        setUsers(users);
+        setUsers((prevUsers: any[]) => [...(prevUsers ?? []), users]);
       } catch (err: any) {
         toast({
           title: "error",
@@ -68,7 +68,7 @@ export default function UserSelection({
       [id]: !prev[id],
     }));
   };
-
+  console.log(users);
   return (
     <>
       <Popover open={open} onOpenChange={setOpen}>
@@ -93,34 +93,36 @@ export default function UserSelection({
             <CommandList>
               <CommandEmpty>No user found.</CommandEmpty>
               <CommandGroup>
-                {users?.map((user) => (
-                  <CommandItem
-                    key={user.id}
-                    value={user.username}
-                    onSelect={() => {
-                      setSelectedUsers((users: User[]) => {
-                        // Check if the user is already selected
-                        if (
-                          users.find(
-                            (selectedUser: User) => selectedUser.id === user.id
-                          )
-                        ) {
-                          return users; // Return the previous state if the user is already selected
-                        }
-                        return [...users, user]; // Add the new user if not already selected
-                      });
-                      setOpen(false);
-                    }}
-                  >
-                    {user.username}
-                    <CheckIcon
-                      className={cn(
-                        "ml-auto h-4 w-4",
-                        value === user.username ? "opacity-100" : "opacity-0"
-                      )}
-                    />
-                  </CommandItem>
-                ))}
+                {users &&
+                  users?.map((user) => (
+                    <CommandItem
+                      key={user.id}
+                      value={user.username}
+                      onSelect={() => {
+                        setSelectedUsers((users: User[]) => {
+                          // Check if the user is already selected
+                          if (
+                            users.find(
+                              (selectedUser: User) =>
+                                selectedUser.id === user.id
+                            )
+                          ) {
+                            return users; // Return the previous state if the user is already selected
+                          }
+                          return [...users, user]; // Add the new user if not already selected
+                        });
+                        setOpen(false);
+                      }}
+                    >
+                      {user.username}
+                      <CheckIcon
+                        className={cn(
+                          "ml-auto h-4 w-4",
+                          value === user.username ? "opacity-100" : "opacity-0"
+                        )}
+                      />
+                    </CommandItem>
+                  ))}
               </CommandGroup>
             </CommandList>
           </Command>
