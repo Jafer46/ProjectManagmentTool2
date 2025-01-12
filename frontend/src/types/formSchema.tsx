@@ -55,11 +55,12 @@ export const userSchema = z.object({
 
 export const projectSchema = z.object({
   title: z.string().min(3, {
-    message: "title must be at least three laters.",
+    message: "title must be at least three later.",
   }),
   description: z.string().min(3, {
     message: "description must be at least three characters.",
   }),
   deadline: z.date({ message: "deadline is required" }),
   priority: z.string(),
+  type: z.string(),
 });

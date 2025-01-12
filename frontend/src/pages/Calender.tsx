@@ -44,8 +44,6 @@ function CalenderPage() {
     return <Loading />;
   }
 
-  console.log(data);
-
   return (
     <div className="mt-8">
       <div className="absolute top-2 w-full flex">

@@ -29,7 +29,7 @@ export default function Projects() {
     <Tabs className="w-full px-4 " defaultValue="projects">
       <TabsList className="grid w-full grid-cols-3 mb-2 blur blur-low">
         <TabsTrigger value="projects">All Projects</TabsTrigger>
-        <TabsTrigger value="myPorjects">My project</TabsTrigger>
+        <TabsTrigger value="myProjects">My project</TabsTrigger>
         <TabsTrigger value="completed">Completed</TabsTrigger>
       </TabsList>
       <TabsContent value="projects">
@@ -39,7 +39,7 @@ export default function Projects() {
           ))}
         </div>
       </TabsContent>
-      <TabsContent value="myPorjects">
+      <TabsContent value="myProjects">
         <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-3">
           {projects
             ?.filter((p) => p.creatorId == user.id)

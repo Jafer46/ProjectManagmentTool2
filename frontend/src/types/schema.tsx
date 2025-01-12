@@ -40,8 +40,10 @@ export interface Project {
   description?: string;
   priority: "medium" | "high" | "low";
   status: "ongoing" | "pending" | "overdue" | "completed";
-  creatorId?: string | number;
+  creatorId?: string;
   deadline: Date;
+  type: "group" | "personal";
+  completedAt?: Date;
 
   tasksCount?: number;
   completedTasksCount?: number;

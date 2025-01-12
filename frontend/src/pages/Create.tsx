@@ -1,6 +1,6 @@
 import { createProject } from "@/api/projectApi";
 import SubmitButton from "@/components/SubmitButton";
-import { projectSchema } from "@/types/formSchma";
+import { projectSchema } from "@/types/formSchema";
 import useAuth from "@/store/store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormFieldType } from "../../constants";
@@ -28,6 +28,7 @@ export const Create = () => {
       description: "",
       deadline: new Date(),
       priority: "",
+      type: "group",
     },
   });
 
@@ -53,6 +54,9 @@ export const Create = () => {
       setLoading(false);
     }
   };
+
+  const priorities = ["high", "low", "medium"];
+  const types = ["group", "personal"];
   return (
     <div className="h-full w-full blur blur-low p-4 rounded-lg">
       <Form {...form}>
@@ -88,6 +92,15 @@ export const Create = () => {
                 name="priority"
                 label="Select Priority"
                 placeHolder="select priority"
+                selectValues={priorities}
+              />
+              <CustomFormField
+                fieldType={FormFieldType.SELECT}
+                control={form.control}
+                name="type"
+                label="Select project type"
+                placeHolder="select type"
+                selectValues={types}
               />
               <FormLabel className="text-lg font-semibold">
                 Select Users

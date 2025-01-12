@@ -1,6 +1,6 @@
 import SubmitButton from "@/components/SubmitButton";
 import { useToast } from "@/components/ui/use-toast";
-import { userSchema } from "@/types/formSchma";
+import { userSchema } from "@/types/formSchema";
 import useAuth from "@/store/store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormFieldType } from "../../constants";
@@ -32,7 +32,7 @@ export default function Settings() {
       toast({
         variant: "destructive",
         title: "error",
-        description: "unexpected error occured",
+        description: "unexpected error occurred",
       });
     }
   };
