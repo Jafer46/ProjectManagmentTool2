@@ -1,5 +1,5 @@
 import axios from "axios";
-import { baseURL } from "@/intercepter";
+import { baseURL } from "@/interceptor";
 
 interface User {
   username: string;

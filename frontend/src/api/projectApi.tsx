@@ -1,4 +1,4 @@
-import { baseURL } from "@/intercepter";
+import { baseURL } from "@/interceptor";
 import axios from "axios";
 
 export const createProject = (data: any, token: string) => {

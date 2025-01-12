@@ -21,11 +21,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { getPorjectTasks } from "@/api/taskApi";
+import { getProjectTasks } from "@/api/taskApi";
 import { useToast } from "@/components/ui/use-toast";
 import { useQuery } from "@tanstack/react-query";
 import UserList from "@/components/userList";
-import useAddTasks from "@/hooks/use-add-taks";
+import useAddTasks from "@/hooks/use-add-tasks";
 
 export default function AddTasks() {
   const {
@@ -86,7 +86,7 @@ export default function AddTasks() {
 
   const { data: tasks } = useQuery<Task[], Error>({
     queryKey: ["Tasks"],
-    queryFn: () => getPorjectTasks(project.id, token),
+    queryFn: () => getProjectTasks(project.id, token),
   });
 
   const update = (task: Task) => {

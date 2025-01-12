@@ -1,5 +1,5 @@
 import axios from "axios";
-import { baseURL } from "@/intercepter";
+import { baseURL } from "@/interceptor";
 import { Task } from "@/types/schema";
 export const createTask = (data: any, token: String) =>
   axios
@@ -11,7 +11,7 @@ export const createTask = (data: any, token: String) =>
       throw err;
     });
 
-export const getPorjectTasks = (projectId: string, token: string) =>
+export const getProjectTasks = (projectId: string, token: string) =>
   axios
     .get(`${baseURL}/task/project/${projectId}`, {
       headers: { Authorization: `Bearer ${token}` },
