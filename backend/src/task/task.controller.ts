@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  Post,
   Put,
   Req,
   UnauthorizedException,
@@ -24,6 +25,14 @@ export class TaskController {
   async getTasks(@Req() req: Request) {
     const creatorId = Number(req.user);
     this.taskServices.getTasks({ where: { creatorId } });
+  }
+
+  @Post()
+  async createTask(@Req() req: Request, @Body() body) {
+    console.log(body);
+    const userId = req.user;
+    body.creatorId = userId;
+    return this.taskServices.createTask(body);
   }
 
   @Put('id')

@@ -47,7 +47,7 @@ export class ProjectController {
     const creatorId = req.user;
     const { title, description, userList, deadline, priority, type } = body;
     body.creatorId = creatorId;
-    this.projectService.createProject(body);
+    return this.projectService.createProject(body);
   }
 
   @Put('id')

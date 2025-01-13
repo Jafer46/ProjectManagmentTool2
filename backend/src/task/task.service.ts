@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/common/prisma.Service';
 import { Task, Prisma } from '@prisma/client';
+import { CreateTaskDTO } from './dto/create-task-dto';
 
 type TasksProject = Prisma.TaskGetPayload<{
   include: {
@@ -27,7 +28,20 @@ export class TaskService {
     });
   }
 
-  async createTask(data: Prisma.TaskCreateInput): Promise<Task> {
+  async createTask(createTask: CreateTaskDTO): Promise<Task> {
+    const data: Prisma.TaskCreateInput = {
+      title: createTask.title,
+      description: createTask.description,
+      creatorId: Number(createTask.creatorId),
+      project: {
+        connect: { id: Number(createTask.projectId) },
+      },
+      assignedUsers: {
+        connect: createTask.assignedUsersId.map((userId) => ({
+          id: Number(userId),
+        })),
+      },
+    };
     return this.prisma.task.create({ data });
   }
 

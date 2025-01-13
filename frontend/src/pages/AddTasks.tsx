@@ -26,6 +26,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { useQuery } from "@tanstack/react-query";
 import UserList from "@/components/userList";
 import useAddTasks from "@/hooks/use-add-tasks";
+import { useEffect } from "react";
 
 export default function AddTasks() {
   const {
@@ -58,7 +59,8 @@ export default function AddTasks() {
       !title ||
       !description ||
       !assignedUsers ||
-      assignedUsers.length === 0
+      assignedUsers.length === 0 ||
+      !project.id
     ) {
       toast({
         variant: "destructive",
@@ -93,6 +95,10 @@ export default function AddTasks() {
     task.completed = true;
     taskMutation.mutate(task);
   };
+
+  useEffect(() => {
+    console.log(assignedUsers);
+  }, [assignedUsers]);
   return (
     <div className="w-full blur blur-high rounded-lg p-4 ">
       <div className="text-xl font-semibold mb-2">Table of Tasks</div>
@@ -121,11 +127,7 @@ export default function AddTasks() {
                   {task.completed ? "Completed" : "Pending"}
                 </TableCell>
                 <TableCell>
-                  <UserList
-                    users={users.filter((user: User) =>
-                      task.assignedUsersId?.includes(user.id)
-                    )}
-                  />
+                  <UserList users={task.assignedUsers ?? []} />
                 </TableCell>
                 <TableCell>
                   {!task.completed &&
@@ -162,10 +164,10 @@ export default function AddTasks() {
               <TableCell>
                 <Select
                   onValueChange={(value) =>
-                    setAssignedUsers((values) => [
-                      ...(values || []),
-                      Number(value),
-                    ])
+                    setAssignedUsers((values) => {
+                      if (values?.includes(Number(value))) return;
+                      return [...(values || []), Number(value)];
+                    })
                   }
                 >
                   <SelectTrigger className="w-full">
