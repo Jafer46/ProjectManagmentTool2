@@ -9,6 +9,9 @@ export class TimeController {
   @Post()
   async getCalendar(@Body() body) {
     const { date } = body;
-    return this.timeService.getCalendar(date);
+    console.log(body);
+    const result = await this.timeService.getCalendar(date);
+    console.log(result);
+    return result;
   }
 }

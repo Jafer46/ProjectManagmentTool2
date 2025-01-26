@@ -13,7 +13,7 @@ const date = {
 function CalenderPage() {
   const [month, setMonth] = React.useState(date);
 
-  const { isLoading, data, error } = useQuery({
+  const { isLoading, data, error, refetch } = useQuery({
     queryKey: ["calendar"],
     queryFn: () => getCalendar(month),
   });
@@ -38,6 +38,7 @@ function CalenderPage() {
         return month;
       });
     }
+    refetch();
   };
 
   if (isLoading) {
@@ -57,7 +58,7 @@ function CalenderPage() {
           <ArrowRight onClick={() => handleChange(false)} />
         </div>
       </div>
-      <CalendarView />
+      <CalendarView indices={data} />
     </div>
   );
 }

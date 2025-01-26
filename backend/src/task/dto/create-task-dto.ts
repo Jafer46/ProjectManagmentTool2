@@ -1,4 +1,4 @@
-import { IsString } from 'class-validator';
+import { IsArray, IsString } from 'class-validator';
 
 export class CreateTaskDTO {
   @IsString()
@@ -9,5 +9,6 @@ export class CreateTaskDTO {
   creatorId: string;
   @IsString()
   projectId: string;
+  @IsArray()
   assignedUsersId: string[];
 }

@@ -7,8 +7,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function Projects() {
   const { token, user } = useAuth();
+  console.log(token);
 
-  const { data: projects } = useQuery<Project[], Error>({
+  const { data: projects, error } = useQuery<Project[], Error>({
     queryKey: ["Projects"],
     queryFn: () => getUserProjects(token),
   });
